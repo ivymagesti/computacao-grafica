@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Sistema Solar</title>
+	<style>
+		body {
+			margin: 0;
+		}
+	</style>
+</head>
+
+<body>
+	<script type="module">
+		import * as THREE from '/build/three.module.js';
+		const scene = new THREE.Scene();
+		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+		const renderer = new THREE.WebGLRenderer();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+		document.body.appendChild(renderer.domElement);
+
+		const texture_sol = new THREE.TextureLoader().load("textures/sol.jpg");
+		const texture_mercurio = new THREE.TextureLoader().load("textures/mercurio.jpg");
+		const texture_venus = new THREE.TextureLoader().load("textures/venus.jpg");
+		const texture_terra = new THREE.TextureLoader().load("textures/terra.jpg");
+		const texture_marte = new THREE.TextureLoader().load("textures/marte.jpg");
+		const texture_jupiter = new THREE.TextureLoader().load("textures/jupiter.jpg");
+		const texture_saturno = new THREE.TextureLoader().load("textures/saturno.jpg");
+		const texture_anel = new THREE.TextureLoader().load("textures/anel.jpg");
+		const texture_urano = new THREE.TextureLoader().load("textures/urano.jpg");
+		const texture_netuno = new THREE.TextureLoader().load("textures/netuno.jpg");
+		const texture_plutao = new THREE.TextureLoader().load("textures/plutao.jpg");
+
+        //construção de pivots 
+        //pivo sol - mercurio
+		const geopivot_mercurio = new THREE.BoxGeometry();
+		const pivot_mercurio = new THREE.Mesh(geopivot_mercurio);
+		scene.add(pivot_mercurio);
+
+        //pivo sol - venus
+		const geopivot_venus = new THREE.BoxGeometry();
+		const pivot_venus = new THREE.Mesh(geopivot_venus);
+		scene.add(pivot_venus);
+
+        //pivo sol - terra
+		const geopivot_terra = new THREE.BoxGeometry();
+		const pivot_terra = new THREE.Mesh(geopivot_terra);
+		scene.add(pivot_terra);
+
+        //pivo sol - marte
+		const geopivot_marte = new THREE.BoxGeometry();
+		const pivot_marte = new THREE.Mesh(geopivot_marte);
+		scene.add(pivot_marte);
+
+        //pivo sol - jupiter
+		const geopivot_jupiter = new THREE.BoxGeometry();
+		const pivot_jupiter = new THREE.Mesh(geopivot_jupiter);
+		scene.add(pivot_jupiter);
+
+        //pivo sol - saturno
+		const geopivot_saturno = new THREE.BoxGeometry();
+		const pivot_saturno = new THREE.Mesh(geopivot_saturno);
+		scene.add(pivot_saturno);
+
+		//pivo sol - anel
+		const geopivot_anel = new THREE.BoxGeometry();
+		const pivot_anel = new THREE.Mesh(geopivot_anel);
+		scene.add(pivot_anel);
+
+		//pivo sol - urano
+		const geopivot_urano = new THREE.BoxGeometry();
+		const pivot_urano = new THREE.Mesh(geopivot_urano);
+		scene.add(pivot_urano);
+
+		//pivo sol - netuno
+		const geopivot_netuno = new THREE.BoxGeometry();
+		const pivot_netuno = new THREE.Mesh(geopivot_netuno);
+		scene.add(pivot_netuno);
+
+		//pivo sol - plutao
+		const geopivot_plutao = new THREE.BoxGeometry();
+		const pivot_plutao = new THREE.Mesh(geopivot_plutao);
+		scene.add(pivot_plutao);
+
+        //contrução planetas
+         //construção sol 
+		const geometria_sol = new THREE.SphereGeometry(30, 32, 16); 
+		const material_sol = new THREE.MeshBasicMaterial({ map : texture_sol }); 
+		const sol = new THREE.Mesh(geometria_sol, material_sol);
+        scene.add(sol);
+
+		//luz a partir do sol
+		const pluz = new THREE.PointLight(0xFFFFFF,2,400);
+		sol.add(pluz);
+
+        //construção mercurio 
+		const geometria_mercurio = new THREE.SphereGeometry(6, 32, 16); 
+		const material_mercurio = new THREE.MeshBasicMaterial({ map : texture_mercurio }); 
+		const mercurio = new THREE.Mesh(geometria_mercurio, material_mercurio);
+
+        //construção venus 
+		const geometria_venus = new THREE.SphereGeometry(6, 32, 16); 
+		const material_venus = new THREE.MeshBasicMaterial({ map : texture_venus }); 
+		const venus = new THREE.Mesh(geometria_venus, material_venus);
+
+        //construção terra 
+		const geometria_terra = new THREE.SphereGeometry(6, 32, 16);
+		const material_terra = new THREE.MeshBasicMaterial({ map : texture_terra }); 
+		const terra = new THREE.Mesh(geometria_terra, material_terra);
+
+        //construção marte 
+		const geometria_marte = new THREE.SphereGeometry(6, 32, 16); 
+		const material_marte = new THREE.MeshBasicMaterial({ map : texture_marte }); 
+		const marte = new THREE.Mesh(geometria_marte, material_marte);
+
+        //construção jupiter 
+		const geometria_jupiter = new THREE.SphereGeometry(6, 32, 16); 
+		const material_jupiter = new THREE.MeshBasicMaterial({ map : texture_jupiter }); 
+		const jupiter = new THREE.Mesh(geometria_jupiter, material_jupiter);
+
+		//construção esfera saturno
+		const geometria_saturno = new THREE.SphereGeometry(10, 32, 16); /*geometria parametros basicos tamanho da geometria*/
+		const material_saturno = new THREE.MeshBasicMaterial({ map : texture_saturno }); /*cor e geometria*/
+		const saturno = new THREE.Mesh(geometria_saturno, material_saturno);
+
+		//	construção anel saturno	
+		const geometria = new THREE.TorusGeometry(15, 1.2375, 2, 100, 6.283185)
+		const materia = new THREE.MeshBasicMaterial({ map : texture_anel });
+		const anel = new THREE.Mesh(geometria, materia);
+
+        //construção urano 
+		const geometria_urano = new THREE.SphereGeometry(10, 32, 16); 
+		const material_urano = new THREE.MeshBasicMaterial({ map : texture_urano }); 
+		const urano = new THREE.Mesh(geometria_urano, material_urano);
+        
+        //construção netuno 
+		const geometria_netuno = new THREE.SphereGeometry(6, 32, 16); 
+		const material_netuno = new THREE.MeshBasicMaterial({ map : texture_netuno }); 
+		const netuno = new THREE.Mesh(geometria_netuno, material_netuno);
+        
+		//construção plutao
+		const geometria_plutao = new THREE.SphereGeometry(6, 32, 16); 
+		const material_plutao = new THREE.MeshBasicMaterial({ map : texture_plutao }); 
+		const plutao = new THREE.Mesh(geometria_plutao, material_plutao);
+        
+        //adição das imagens
+        pivot_mercurio.add(mercurio);
+		pivot_venus.add(venus);
+		pivot_terra.add(terra);
+        pivot_marte.add(marte);
+		pivot_jupiter.add(jupiter);
+		pivot_saturno.add(saturno);
+        pivot_anel.add(anel);
+		pivot_urano.add(urano);
+		pivot_netuno.add(netuno);
+        pivot_plutao.add(plutao);
+
+		//const axesHelper = new THREE.AxesHelper(87); /*desenho do eixo na tela*/
+		//scene.add(axesHelper);
+
+		//posições
+        sol.position.x = -100;
+        //posição pivot 
+        pivot_mercurio.position.x = -100;
+        pivot_venus.position.x = -100;
+        pivot_terra.position.x = -100;
+        pivot_marte.position.x = -100;
+        pivot_jupiter.position.x = -100;
+        pivot_saturno.position.x = -100;
+		pivot_anel.position.x = -100;
+		pivot_urano.position.x = -100;
+		pivot_netuno.position.x = -100;
+		pivot_plutao.position.x = -100;
+
+        //posição planeta
+        mercurio.position.x = -40;
+        venus.position.x = -60;
+		terra.position.x = -80;
+		marte.position.x = -100;
+        jupiter.position.x = -120;
+		saturno.position.x = -150;
+		anel.position.x = -149;
+        urano.position.x = -180;
+        netuno.position.x = -200;
+        plutao.position.x = -220;
+
+		camera.position.set(1, 1, 300);
+
+		//direção
+		//rotação esfera saturno
+		saturno.rotation.y = 0.0;
+		//rotação anel saturno
+		anel.rotation.x = 5;
+		//rotação terra
+		terra.rotation.x = 0.01;
+        mercurio.rotation.x = 0.01;
+		plutao.rotation.x = 0.01;
+
+		let flag_mover_direita = 1; /*flag: quando 0 move esquerda, quando 1 move pra direita*/
+
+		function animate() {
+			requestAnimationFrame(animate);
+
+			saturno.rotation.x += 0.1;
+			saturno.rotation.y += 0.1;
+			anel.rotation.z += 0.1;
+			terra.rotation.y += 0.1;
+            mercurio.rotation.x += 0.1;
+
+            pivot_mercurio.rotation.y += 0.01;
+            pivot_venus.rotation.y += 0.009;
+            pivot_terra.rotation.y += 0.008;
+            pivot_marte.rotation.y += 0.007;
+            pivot_jupiter.rotation.y += 0.006;
+            pivot_saturno.rotation.y += 0.005;
+			pivot_anel.rotation.y += 0.005;
+			pivot_urano.rotation.y += 0.003;
+			pivot_netuno.rotation.y += 0.002;
+			pivot_plutao.rotation.y += 0.001;
+
+			//if (saturno.position.x >= 55) { /*verifica o posição do cubo e muda a direção*/
+				//flag_mover_direita = 0; /*move pra esquerda*/
+			//} else if (saturno.position.x <= 45) {
+			//	flag_mover_direita = 1; /*move pra direita*/
+			//}
+
+			//if (flag_mover_direita == 1) { /*velocidade*/
+			//	saturno.position.x += 0.3; /*velocidade pra direita*/
+			//} else {
+			//	saturno.position.x -= 0.3; /*velocidade pra esquerda*/
+			//}
+
+			renderer.render(scene, camera);
+		};
+
+		animate();
+	</script>
+</body>
+
+</html>
